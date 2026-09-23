@@ -1,0 +1,75 @@
+SAN FRANCISCO 49ERS — KANAL KURULUMU
+=====================================
+
+Takim: San Francisco 49ers | Stadyum: Levi's Stadium | Renk: 49ers kirmizisi + altin
+Kadro 2026 sezonuna gore: Brock Purdy, Christian McCaffrey, George Kittle,
+Nick Bosa, Fred Warner, Trent Williams, Mike Evans, Deebo Samuel Sr.,
+koc Kyle Shanahan.
+
+Sistem diger NFL kanallariyla ayni. ElevenLabs adimi YOK, kuyruk sadece SES
+dosyasi kabul ediyor; yanlislikla birakilan bir .txt sessizce yok sayilir.
+
+
+DOSYALARI YERLESTIR
+-------------------
+Zip'in icindekilerin hepsini (OKU.txt haric) klonladigin klasore KOPYALA.
+Ctrl+A -> Ctrl+C -> klasorde Ctrl+V.   Ctrl+X KULLANMA.
+
+Klasorde su yapi olmali:
+  .git  .github  assets  content  scripts  .gitignore  channel.json
+
+README ya da .gitattributes goruyorsan yanlis kaynaktan kopyalamissin.
+
+GitHub Desktop -> Current repository dogru depo mu, KONTROL ET
+-> Commit to main -> Push origin
+
+NOT: depoyu acarken "Add a README file" kutusunu isaretlediysen push
+"unrelated histories" hatasi verir. O durumda Repository -> Open in Command
+Prompt deyip su komutu calistir:  git push --force origin main
+
+
+IZIN (sart)
+-----------
+Settings -> Actions -> General -> en altta "Workflow permissions"
+"Read and write permissions" sec -> Save
+
+Bu olmadan video render edilir ama Release'e yuklenemez.
+API anahtarina gerek yok, sesi kendi programin uretiyor.
+
+
+STOK VIDEO HAVUZU
+-----------------
+Releases -> Create a new release
+  Tag: broll    Title: broll
+  49ers stok videolarini surukle -> "Publish release"
+  ("Save draft" e BASMA — taslak release indirilemiyor)
+
+COK SAYIDA KLIP ICIN: GitHub bir release'e en fazla 1000 dosya aliyor.
+Havuz buyudukce broll2, broll3... diye yeni release'ler acabilirsin;
+sistem broll ile baslayan numarali etiketlerin HEPSINI indirir. Ayri
+klasorlere indigi icin ayni isimli dosyalar birbirini ezmez.
+
+Istege bagli: music (muzik), ambient (stadyum ugultusu), photos (foto).
+
+
+ILK VIDEO
+---------
+Ses otomasyonunun kanal listesine bu depoyu ekle. Metni atinca program sesi
+uretip content/queue icine yazacak ve push edecek, render kendiliginden
+baslayacak.
+
+Elle yapacaksan: mp3'u content/queue icine at, dosya adi videonun basligi
+olsun, commit + push.
+
+Render kaydinda:
+  [assemble] b-roll: 24 clips (offset 3)
+  [assemble] kurgu karisimi: 34 stok video / ... (stok %100)
+
+"b-roll: 0 clips" -> broll release'i taslakta kalmis demektir.
+
+
+AYNI VIDEOYU TEKRAR RENDER ETMEK
+--------------------------------
+Sistem, adina karsilik gelen Release varsa videoyu ikinci kez kurmaz
+("zaten var" der). Yeniden kurdurmak istersen o Release'i sil, sonra
+Actions -> render-queue -> Run workflow.
